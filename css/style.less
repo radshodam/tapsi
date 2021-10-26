@@ -1,0 +1,276 @@
+/* Reset  */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* root variable */
+
+@primary: #ff5722;
+@primary-light: #ff7a50;
+@secondary-light: #fff6f2;
+@secondary-dark: #ffa589;
+@navbar: #f8f8f8;
+@headings: #000;
+@body: #333333;
+@white: #fff;
+@-size: 50px;
+//
+html {
+  font-size: 62.5%;
+  /* 10px */
+}
+// 12px in rems: 12 / 16 = 0.75rem
+// 10px in rems: 10 / 16 = 0.625rem
+body {
+  color: @headings;
+  font-size: 1.4rem;
+  /* 14px */
+  line-height: 1.7;
+}
+html,
+body,
+p {
+  text-size-adjust: none !important;
+  -webkit-text-size-adjust: none !important;
+  -moz-text-size-adjust: none !important;
+  -ms-text-size-adjust: none !important;
+  // mobile tablet or text-size-adjust none=>Disables the browser's inflation algorithm.
+}
+
+h1,
+h2,
+h3 {
+  color: @headings;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+// If [device width] is greater than or equal to 1024px, then do {…}”
+@media screen and (min-width: 1024px) {
+  body {
+    font-size: 1.8rem;
+  }
+  h1 {
+    font-size: 5rem;
+  }
+  h2 {
+    font-size: 3.5rem;
+    margin-bottom: 3.5rem;
+  }
+}
+//import font
+@import url("/css/fonts.css");
+//day night for american location browser
+.day {
+  background: #eee;
+  color: black;
+}
+.night {
+  background: #333;
+  color: white;
+}
+
+/* buttons */
+.btn {
+  cursor: pointer;
+  outline: 0;
+  border: 0;
+  padding: 2rem 2.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 1.4rem;
+  //color btn-primary
+  &--primary {
+    background-color: @primary;
+    color: @white;
+  }
+  &--secondary {
+    background-color: @secondary-dark;
+    color: @white;
+  }
+  &--block {
+    width: 100%;
+    font-size: 1.6rem;
+  }
+  //media
+  @media screen and (min-width: 1024px) {
+    font-size: 1.6rem;
+    &--block {
+      font-size: 2rem;
+    }
+  }
+} 
+//end btn
+/*start NAVBAR */
+.main-header {
+  background-color: @navbar;
+  //auto day and night
+  //day mean might for Iran location
+  @media (prefers-color-scheme: light) {
+    background: #a1a1a1;
+    color: #ffffff;
+  }
+}
+.nav {
+  //for width<768
+  display: flex;
+  justify-content: space-between;
+  align-items: center; //item top bottom => auto
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+  &__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column; // for media and media is row
+    font-size: 1.4rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease-out;
+  }
+  &__expanded &__list {
+    //nav__expanded show by bclick js
+    max-height: 100vh;
+    opacity: 1;
+  }
+  &__item {
+    margin-top: 1rem;
+    border-bottom: 1px solid #ccc;
+    a {
+      text-decoration: none;
+      color: #444;
+      display: block;
+      padding: 0.5rem 0;
+      transition: all 0.4s ease-out;
+      &:hover {
+        color: @primary;
+      }
+    }
+    &.cta {
+      font-size: 1.4rem;
+      border: 0;
+      a {
+        color: #fff;
+        font-size: 1.4rem;
+        &:hover {
+          color: @navbar;
+          background: @secondary-dark;
+        }
+      }
+    }
+    .btn {
+      padding: 1rem 3rem;
+    }
+  }
+  //toggler
+  &__toggler {
+    cursor: pointer;
+  }
+  &__expanded {
+      //nav__expanded show by bclick js
+    .bar-one {
+      transform: rotate(-45deg) translate(-9px, 6px);
+      margin: 8px 0;
+    }
+    .bar-two {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    .bar-three {
+      transform: rotate(45deg) translate(-8px, -8px);
+      margin: 8px 0;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    //nav
+    padding: 0 2rem;
+    &__toggler {
+      display: none;
+    }
+    &__list {
+      flex-direction: row;
+      align-items: center;
+      width: auto;
+      opacity: 1;
+      max-height: 100%;
+    }
+    &__item {
+      margin-right: 2rem;
+      margin-top: 0;
+      font-size: 1.5rem;
+      border: 0;
+    }
+  }
+}
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #000;
+  margin: 5px 0;
+  border-radius: 5px;
+  transition: all 0.4s ease-out;
+}
+/*end NAVBAR */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// /* Badge */
+// .badge {
+//   display: inline-block;
+//   padding: 0.5rem 1.3rem;
+//   background-color: #fff;
+//   border-radius: 32px;
+//   border: 2px solid var(--color-primary);
+//   color: var(--color-primary);
+//   text-transform: uppercase;
+//   font-size: 1.2rem;
+//   &--primary {
+//     background-color: @primary;
+//     color: @white;
+//   }
+//   //media for badge
+//   @media screen and (min-width: 1024px) {
+//     font-size: 1.4rem;
+//   }
+// }
